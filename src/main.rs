@@ -57,7 +57,7 @@ fn main() {
         println!("{}", "[*] Verbose mode enabled\n".cyan().bold());
     }
 
-    let entries = wordlist(&args.wordlist).expect("Impossible de lire la wordlist");
+    let entries = wordlist(&args.wordlist).expect("Unable to read the wordlist");
 
     rayon::ThreadPoolBuilder::new()
         .num_threads(args.threads)
@@ -106,10 +106,10 @@ fn main() {
                         format!("./{}", entry),
                         colored_status,
                         size,
-                        full_url
+                        full_url.blue()
                     );
 
-                    pb.println(display_line.clone()); // proprement au-dessus de la barre
+                    pb.println(display_line.clone());
 
                     if let Some(_) = args.output {
                         let mut res = results.lock().unwrap();
