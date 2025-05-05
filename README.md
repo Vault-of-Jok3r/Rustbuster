@@ -54,9 +54,11 @@ For now, you can use those parameters:
 
 | Flag               | Description                           |
 | ------------------ | ------------------------------------- |
+| `--help`, `-h`     | For help with args                    |
 | `--url`, `-u`      | Target URL                            |
 | `--wordlist`, `-w` | Path to the wordlist                  |
 | `--threads`, `-t`  | Number of threads to use (default: 1) |
+| `--output`, `-o`   | For export the result in a file       |
 | `--verbose`, `-v`  | Verbose mode to see every result      |
 
 ### 🧪 Output Example
