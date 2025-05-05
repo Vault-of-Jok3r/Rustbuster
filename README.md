@@ -1,0 +1,2 @@
+# Rustbuster
+🔎 Gobuster in Rust
