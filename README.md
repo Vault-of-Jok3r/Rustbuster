@@ -29,6 +29,8 @@ The authors are **not responsible for any misuse** or illegal activity conducted
 
 If you didn't installed Rust yet, you can follow the official documentation: https://www.rust-lang.org/tools/install
 
+Clone the repository:
+
 ```bash
 git clone https://github.com/Vault-of-Jok3r/Rustbuster.git
 cd Rustbuster
