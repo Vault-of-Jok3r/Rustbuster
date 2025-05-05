@@ -98,9 +98,9 @@ fn main() {
         }
     }
 
-    println!("\n=======================================================================\n");
+    println!("\n=======================================================================");
     println!("Finished scanning {} entries.", entries.len());
     println!("=======================================================================\n");
-    println!("Thanks for using RustBuster!");
+    println!("Thanks for using RustBuster!\n");
     
 }
