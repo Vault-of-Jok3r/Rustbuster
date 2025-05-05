@@ -15,6 +15,9 @@ struct Args {
 
     #[arg(short, long, default_value_t = 1)]
     threads: usize,
+
+    #[arg(short, long)]
+    verbose: bool,
 }
 
 fn wordlist(path: &str) -> io::Result<Vec<String>> {
@@ -51,6 +54,10 @@ fn main() {
     .build()
     .expect("Failed to build HTTP client");
 
+    if args.verbose {
+        println!("{}", "[*] Verbose mode enabled\n".cyan().bold());
+    }
+
     for entry in &entries {
         let full_url = format!("{}/{}", args.url.trim_end_matches('/'), entry);
 
@@ -71,29 +78,35 @@ fn main() {
                     status_str.red()
                 };
 
-                if code >= 200 && code < 400 {
-                    println!(
-                        "{:<20} ({}) [Size: {}] [→ {}]",
-                        format!("./{}", entry),
-                        colored_status,
-                        size,
-                        full_url.blue()
-                    );
-                } else {
-                    println!(
-                        "{:<20} ({}) [Size: {}]",
-                        format!("./{}", entry),
-                        colored_status,
-                        size
-                    );
+                let is_relevant = matches!(code, 200 | 301 | 302 | 307 | 308 | 403 | 401);
+
+                if args.verbose || is_relevant {
+                    if matches!(code, 200 | 301 | 302 | 307 | 308) {
+                        println!(
+                            "{:<20} ({}) [Size: {}] [→ {}]",
+                            format!("./{}", entry),
+                            colored_status,
+                            size,
+                            full_url.blue()
+                        );
+                    } else {
+                        println!(
+                            "{:<20} ({}) [Size: {}]",
+                            format!("./{}", entry),
+                            colored_status,
+                            size
+                        );
+                    }
                 }
             }
             Err(err) => {
-                println!(
-                    "{:<20} ({})",
-                    format!("./{}", entry),
-                    format!("Error: {}", err).red()
-                );
+                if args.verbose {
+                    println!(
+                        "{:<20} ({})",
+                        format!("./{}", entry),
+                        format!("Error: {}", err).red()
+                    );
+                }
             }
         }
     }
@@ -102,5 +115,5 @@ fn main() {
     println!("Finished scanning {} entries.", entries.len());
     println!("=======================================================================\n");
     println!("Thanks for using RustBuster!\n");
-    
+
 }
