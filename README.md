@@ -57,6 +57,7 @@ For now, you can use those parameters:
 | `--url`, `-u`      | Target URL                            |
 | `--wordlist`, `-w` | Path to the wordlist                  |
 | `--threads`, `-t`  | Number of threads to use (default: 1) |
+| `--verbose`, `-v`  | Verbose mode to see every result      |
 
 ### 🧪 Output Example
 
